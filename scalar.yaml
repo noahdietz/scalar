@@ -17,6 +17,14 @@ spec:
         name: scalar
         env:
         - name: SCALAR_SELECTOR
-          value: "scalar=true"
+          value: "scalar=true" # this defaults to "", meaning it will catch ever single Deployment and ReplicationController event
         - name: SCALAR_STATUS_TIMER
-          value: "3600"
+          value: "3600" # this defaults to 1800 seconds, or 30 min
+        - name: SCALAR_PRINT_STATUS
+          value: "true" # this is the default value, but set it to "false" if you don't want status reports
+        - name: SCALAR_MIN_REPLICAS
+          value: "2" # this is the default value, but change it to set a floor for number of live replicas
+        - name: SCALAR_MAX_REPLICAS
+          value: "8" # this is the default value, but change it to set a limit on the number of pods allowed for a single deployment
+        - name: SCALAR_TARGET_CPU
+          value: "75" # this is the default value, and represents the CPU Utilization Percentage threshold for autoscaling
