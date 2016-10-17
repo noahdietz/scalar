@@ -73,6 +73,7 @@ Glad you asked! Here is a list of available configuration values.
 | ------- | -------:| -----------:|
 |`SCALAR_SELECTOR` | `""` | A label selector used to filter the watcher events to specifically labeled objects |
 |`SCALAR_PRINT_STATUS` | `"true"` | Flag that toggles printing of autocaling statuses |
+|`SCALAR_STATUS_TIMER` | `"1800"` | Frequency in seconds of autoscaling status print |
 |`SCALAR_MIN_REPLICAS` | `"2"` | Minimum number of active replicas in a Deployment/ReplicationController |
 |`SCALAR_MAX_REPLICAS` | `"8"` | Maximum number of active replicas in a Deployment/ReplicationController |
 |`SCALAR_TARGET_CPU` | `"75"` | Target CPU Utilization Percentage for the autoscaling threshold |
