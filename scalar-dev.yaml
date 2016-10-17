@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: scalar
+  labels:
+    name: scalar
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: scalar
+    spec:
+      containers:
+      - image: ndietz/scalar:dev
+        imagePullPolicy: Always
+        name: scalar
+        env:
+        - name: SCALAR_SELECTOR
+          value: "scalar=true"
+        - name: SCALAR_STATUS_TIMER
+          value: "60"
