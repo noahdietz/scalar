@@ -114,16 +114,28 @@ func main() {
 }
 
 func initScalar(client *k8s.Clientset, config *utils.Config) (deploymentWatcher watch.Interface, rcWatcher watch.Interface, err error) {
+  depList, err := client.Extensions().Deployments(api.NamespaceAll).List(api.ListOptions{})
+  if err != nil {
+    return nil, nil, err
+  }
+
   deploymentWatcher, err = client.Extensions().Deployments(api.NamespaceAll).Watch(api.ListOptions{
     LabelSelector: config.ScalarSelector,
+    ResourceVersion: depList.ListMeta.ResourceVersion,
   })
 
   if err != nil {
     return nil, nil, err
   }
 
+  rcList, err := client.Core().ReplicationControllers(api.NamespaceAll).List(api.ListOptions{})
+  if err != nil {
+    return nil, nil, err
+  }
+
   rcWatcher, err = client.Core().ReplicationControllers(api.NamespaceAll).Watch(api.ListOptions{
     LabelSelector: config.ScalarSelector,
+    ResourceVersion: rcList.ListMeta.ResourceVersion,
   })
 
   if err != nil {
